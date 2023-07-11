@@ -18,6 +18,23 @@ function App() {
       <div className="black-nav">
         <h4>ReactBlog</h4>
       </div>
+      <button
+        type="button"
+        onClick={() => {
+          // array, object 원본은 보존하는게 좋음
+          // state변경함수특징
+          // 1. 기존 state, 신규 state가 같으면 변경 안해줌
+          // 2. array, object특징 : 자료 저장시, 값이 바로 저장되는 것이 아니라, 저장된 위치를 저장함.
+          // -> 주소가 바뀌지 않아서  let copy = title 과 같은 방식으로 수정하면 state가 변경되지 않음.
+
+          // state가 array/object면 독립적 카피본을 만들어서 수정해야함
+          let copy = [...title];
+          copy[0] = "여자 코트 추천";
+          setTitle(copy);
+        }}
+      >
+        첫번째 제목을 바꾸는 버튼입니다
+      </button>
       <div className="list">
         <h4>
           {title[0]}
