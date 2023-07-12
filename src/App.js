@@ -8,45 +8,51 @@ function App() {
     "오늘 날씨 어때?",
     "충격 연돈 근황",
   ]);
-  let [좋아요, 좋아요변경] = useState(0);
+  let [좋아요, 좋아요변경] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
+  [1, 2, 3].map(function (a) {
+    return "1213";
+  });
 
   return (
     <div className="App">
       <div className="black-nav">
         <h4>ReactBlog</h4>
       </div>
-      <div className="list">
-        <h4>
-          {title[0]}
-          <button type="button" onClick={() => 좋아요변경(좋아요 + 1)}>
-            ❤️ {좋아요}
-          </button>
-        </h4>
-        <p>2월 17일 발행</p>
-      </div>
-      <div className="list">
-        <h4
-          onClick={() => {
-            if (modal == true) {
-              setModal(false);
-            } else {
-              setModal(true);
-            }
-          }}
-        >
-          {title[1]}
-        </h4>
-        <p>2월 16일 발행</p>
-      </div>
-      <div className="list">
-        <h4>{title[2]}</h4>
-        <p>2월 15일 발행</p>
-      </div>
 
-      {/* {
-        조건식 ? 참일때 실행 코드 : 거짓일때 실행할 코드
-      } */}
+      {/* a: 현재 도는 item , i : 0부터  ++ 되는 정수 */}
+      {title.map(function (a, i) {
+        return (
+          <div className="list" key={i}>
+            <h4>
+              <span
+                onClick={() => {
+                  if (modal == true) {
+                    setModal(false);
+                  } else {
+                    setModal(true);
+                  }
+                }}
+              >
+                {a}
+              </span>
+              <button
+                type="button"
+                onClick={() => {
+                  let likeCopy = [...좋아요];
+                  likeCopy[i] = likeCopy[i] + 1;
+                  좋아요변경(likeCopy);
+                }}
+              >
+                ❤️ {좋아요[i]}
+              </button>
+            </h4>
+            {/* <h4>{title[i]}</h4> */}
+            <p>2월 15일 발행</p>
+          </div>
+        );
+      })}
+
       {modal == true ? <Modal></Modal> : null}
     </div>
   );
