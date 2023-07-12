@@ -14,6 +14,12 @@ function App() {
     return "1213";
   });
 
+  function chnageList() {
+    let titleCopy = [...title];
+    titleCopy[0] = "여자 코트 추천";
+    setTitle(titleCopy);
+  }
+
   return (
     <div className="App">
       <div className="black-nav">
@@ -53,19 +59,25 @@ function App() {
         );
       })}
 
-      {modal == true ? <Modal></Modal> : null}
+      {/* 1. 작명={state이름} */}
+      {modal == true ? (
+        <Modal title={title} color={"skyblue"} chnageList={chnageList}></Modal>
+      ) : null}
     </div>
   );
 }
 
 // 함수 바깥에 넣기
 // 영어대문자로 작명시작
-function Modal() {
+function Modal(props) {
   return (
-    <div className="modal">
-      <h4>제목</h4>
+    <div className="modal" style={{ background: props.color }}>
+      <h4>{props.title[0]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
+      <button type="button" onClick={props.chnageList}>
+        글수정
+      </button>
     </div>
   );
 }
