@@ -1,4 +1,5 @@
 /* eslint-disable */
+import React from "react";
 import { useState } from "react";
 import "./App.css";
 
@@ -98,6 +99,8 @@ function App() {
           currentIdx={currentIdx}
         ></Modal>
       ) : null}
+
+      <Modal2 title={title}></Modal2>
     </div>
   );
 }
@@ -113,6 +116,40 @@ function Modal(props) {
       </button>
     </div>
   );
+}
+
+// 옛날 class 문법
+// 근데 function 권장
+class Modal2 extends React.Component {
+  // props사용하기
+  constructor(props) {
+    super(props);
+    //state
+    this.state = {
+      name: "Kim",
+      age: 20,
+    };
+  }
+  render() {
+    // component
+    return (
+      <div>
+        {/* props 가져다쓰기 */}
+        <p>{this.props.title}</p>
+        {/* state 가져다 쓰기 */}
+        안녕 {this.state.name}, 너 {this.state.age}살이구나
+        {/* 이벤트 넣기 */}
+        <button
+          type="button"
+          onClick={() => {
+            this.setState({ age: 21 });
+          }}
+        >
+          한살먹기
+        </button>
+      </div>
+    );
+  }
 }
 
 export default App;
