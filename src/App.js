@@ -13,6 +13,7 @@ function App() {
   [1, 2, 3].map(function (a) {
     return "1213";
   });
+  let [currentIdx, setCurrentIdx] = useState(null);
 
   function chnageList() {
     let titleCopy = [...title];
@@ -33,11 +34,8 @@ function App() {
             <h4>
               <span
                 onClick={() => {
-                  if (modal == true) {
-                    setModal(false);
-                  } else {
-                    setModal(true);
-                  }
+                  setCurrentIdx(i);
+                  setModal(true);
                 }}
               >
                 {a}
@@ -61,7 +59,12 @@ function App() {
 
       {/* 1. 작명={state이름} */}
       {modal == true ? (
-        <Modal title={title} color={"skyblue"} chnageList={chnageList}></Modal>
+        <Modal
+          title={title}
+          color={"skyblue"}
+          chnageList={chnageList}
+          currentIdx={currentIdx}
+        ></Modal>
       ) : null}
     </div>
   );
@@ -71,8 +74,8 @@ function App() {
 // 영어대문자로 작명시작
 function Modal(props) {
   return (
-    <div className="modal" style={{ background: props.color }}>
-      <h4>{props.title[0]}</h4>
+    <div className="modal">
+      <h4>{props.title[props.currentIdx]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
       <button type="button" onClick={props.chnageList}>
