@@ -9,6 +9,7 @@ function App() {
     "충격 연돈 근황",
   ]);
   let [좋아요, 좋아요변경] = useState(0);
+  let [modal, setModal] = useState(false);
 
   return (
     <div className="App">
@@ -25,7 +26,17 @@ function App() {
         <p>2월 17일 발행</p>
       </div>
       <div className="list">
-        <h4>{title[1]}</h4>
+        <h4
+          onClick={() => {
+            if (modal == true) {
+              setModal(false);
+            } else {
+              setModal(true);
+            }
+          }}
+        >
+          {title[1]}
+        </h4>
         <p>2월 16일 발행</p>
       </div>
       <div className="list">
@@ -33,7 +44,10 @@ function App() {
         <p>2월 15일 발행</p>
       </div>
 
-      <Modal></Modal>
+      {/* {
+        조건식 ? 참일때 실행 코드 : 거짓일때 실행할 코드
+      } */}
+      {modal == true ? <Modal></Modal> : null}
     </div>
   );
 }
@@ -49,16 +63,5 @@ function Modal() {
     </div>
   );
 }
-
-// 이런식으로 만들어도 상관없음
-// const Modal2 = () => {
-//   return (
-//     <div className="modal">
-//       <h4>제목</h4>
-//       <p>날짜</p>
-//       <p>상세내용</p>
-//     </div>
-//   );
-// };
 
 export default App;
