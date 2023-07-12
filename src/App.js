@@ -3,9 +3,6 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  // 자료 잠깐 저장할땐 변수
-  let post = "강남 우동 맛집";
-
   let [title, setTitle] = useState([
     "남자 코트 추천",
     "오늘 날씨 어때?",
@@ -18,38 +15,9 @@ function App() {
       <div className="black-nav">
         <h4>ReactBlog</h4>
       </div>
-      <button
-        type="button"
-        onClick={() => {
-          // array, object 원본은 보존하는게 좋음
-          // state변경함수특징
-          // 1. 기존 state, 신규 state가 같으면 변경 안해줌
-          // 2. array, object특징 : 자료 저장시, 값이 바로 저장되는 것이 아니라, 저장된 위치를 저장함.
-          // -> 주소가 바뀌지 않아서  let copy = title 과 같은 방식으로 수정하면 state가 변경되지 않음.
-
-          // state가 array/object면 독립적 카피본을 만들어서 수정해야함
-          let copy = [...title];
-          copy[0] = "여자 코트 추천";
-          setTitle(copy);
-        }}
-      >
-        첫번째 제목을 바꾸는 버튼입니다
-      </button>
       <div className="list">
         <h4>
           {title[0]}
-          {/* 1. onClick 쓰는법
-          onClick={} 안엔 함수 이름을 넣어야함 
-          onClick={함수명}
-          onClick={()=>{console.log(1)}} 
-          이런식으로 써도 됌 */}
-
-          {/* 2. state 변경하는법
-          항상 state 변경함수 사용
-          state변경함수(새로운state) 
-          - state는 등호로 변경금지
-          - 좋아요변경 이용 > 그래야 재랜더링 잘 됨
-          */}
           <button type="button" onClick={() => 좋아요변경(좋아요 + 1)}>
             ❤️ {좋아요}
           </button>
@@ -64,8 +32,33 @@ function App() {
         <h4>{title[2]}</h4>
         <p>2월 15일 발행</p>
       </div>
+
+      <Modal></Modal>
     </div>
   );
 }
+
+// 함수 바깥에 넣기
+// 영어대문자로 작명시작
+function Modal() {
+  return (
+    <div className="modal">
+      <h4>제목</h4>
+      <p>날짜</p>
+      <p>상세내용</p>
+    </div>
+  );
+}
+
+// 이런식으로 만들어도 상관없음
+// const Modal2 = () => {
+//   return (
+//     <div className="modal">
+//       <h4>제목</h4>
+//       <p>날짜</p>
+//       <p>상세내용</p>
+//     </div>
+//   );
+// };
 
 export default App;
